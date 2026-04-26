@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>ABM libros</title>
+</head>
+<body>
+    <h1>Catálogo</h1>
+
+    <h2>Agregar Libro</h2>
+    <input type="text" id="inputTitulo" placeholder="Ingrese titulo">
+    <input type="text" id="inputAutor" placeholder="Ingrese autor">
+    <input type="number" id="inputPrecio" placeholder="Ingrese precio">
+    <input type="text" id="inputGenero" placeholder="Ingrese género (opcional)">
+    <label>
+        <input type="checkbox" id="inputDisponible"> Disponible
+    </label>
+    <button id="btnAgregar">Agregar</button>
+    <div id="errorForm"></div>
+
+    <h2>Buscar Libro</h2>
+    <input type="text" id="filtroAutor" placeholder="Buscar por autor">
+    <button id="filtrar">Filtrar</button>
+    <button id="mostrarDisponibles">Solo disponibles</button>
+    <button id="mostrarTodos">Ver todos</button>
+
+    <ul id="listado"></ul>
+    <p id="stats"></p>
+    
+    <script src="app.js"></script>
+</body>
+</html>
