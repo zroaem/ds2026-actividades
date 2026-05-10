@@ -47,6 +47,133 @@
         </div>
     </nav>
 
+    <!-- HERO -->
+    <!-- py-5: padding vertical grande. text-white: texto blanco.
+         bg-dark: fondo oscuro. text-center: todo centrado -->
+    <section class="py-5 text-white bg-dark text-center">
+        <div class="container">
+
+            <!-- display-4: título grande, clase de Bootstrap
+                 para headings destacados, más grande que h1 normal -->
+            <h1 class="display-4 fw-bold">Bienvenido a la Librería</h1>
+
+            <!-- lead: clase Bootstrap para subtítulo,
+                 texto poco más grande que el párrafo normal -->
+            <p class="lead mt-3">Explorá nuestro catálogo y encontrá tu próxima lectura.</p>
+
+            <!-- btn-lg: botón más grande que el default.
+                 mt-4: margin top para separarlo del párrafo -->
+            <a href="catalogo.html" class="btn btn-primary btn-lg mt-4">
+                Ver catálogo
+            </a>
+
+        </div>
+    </section>
+
+    <!-- LIBROS DESTACADOS -->
+    <section class="py-5">
+        <div class="container">
+
+            <h2 class="mb-4">Destacados</h2>
+
+            <!-- row: fila de la grilla de Bootstrap.
+                 g-4: gap entre cards (gutters).
+                 row-cols-*: cuántas columnas por fila según tamaño de pantalla.
+                 row-cols-2 → 2 cards en móvil
+                 row-cols-md-3 → 3 cards en tablet
+                 row-cols-lg-6 → 6 cards en desktop -->
+            <div class="row g-4 row-cols-2 row-cols-md-3 row-cols-lg-6">
+
+                <!-- CARD 1 -->
+                <!-- col: cada hijo de row es una columna -->
+                <div class="col">
+                    <!-- h-100: altura 100% para que todas las cards
+                         tengan la misma altura aunque el contenido varíe -->
+                    <div class="card h-100">
+                        <img src="https://picsum.photos/seed/libro1/200/300"
+                             class="card-img-top" alt="El Aleph">
+                        <!-- card-body: contenedor del contenido de la card -->
+                        <div class="card-body d-flex flex-column">
+                            <h6 class="card-title">El Aleph</h6>
+                            <p class="card-text text-muted small">Jorge Luis Borges</p>
+                            <!-- mt-auto: empuja el link al fondo de la card
+                                 sin importar cuánto texto haya arriba -->
+                            <a href="libro.html" class="mt-auto btn btn-outline-primary btn-sm">
+                                Ver más
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CARD 2 -->
+                <div class="col">
+                    <div class="card h-100">
+                        <img src="https://picsum.photos/seed/libro2/200/300"
+                             class="card-img-top" alt="Rayuela">
+                        <div class="card-body d-flex flex-column">
+                            <h6 class="card-title">Rayuela</h6>
+                            <p class="card-text text-muted small">Julio Cortázar</p>
+                            <a href="libro.html" class="mt-auto btn btn-outline-primary btn-sm">Ver más</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CARD 3 -->
+                <div class="col">
+                    <div class="card h-100">
+                        <img src="https://picsum.photos/seed/libro3/200/300"
+                             class="card-img-top" alt="1984">
+                        <div class="card-body d-flex flex-column">
+                            <h6 class="card-title">1984</h6>
+                            <p class="card-text text-muted small">George Orwell</p>
+                            <a href="libro.html" class="mt-auto btn btn-outline-primary btn-sm">Ver más</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CARD 4 -->
+                <div class="col">
+                    <div class="card h-100">
+                        <img src="https://picsum.photos/seed/libro4/200/300"
+                             class="card-img-top" alt="La Metamorfosis">
+                        <div class="card-body d-flex flex-column">
+                            <h6 class="card-title">La Metamorfosis</h6>
+                            <p class="card-text text-muted small">Franz Kafka</p>
+                            <a href="libro.html" class="mt-auto btn btn-outline-primary btn-sm">Ver más</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CARD 5 -->
+                <div class="col">
+                    <div class="card h-100">
+                        <img src="https://picsum.photos/seed/libro5/200/300"
+                             class="card-img-top" alt="Cien años de soledad">
+                        <div class="card-body d-flex flex-column">
+                            <h6 class="card-title">Cien años de soledad</h6>
+                            <p class="card-text text-muted small">Gabriel García Márquez</p>
+                            <a href="libro.html" class="mt-auto btn btn-outline-primary btn-sm">Ver más</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CARD 6 -->
+                <div class="col">
+                    <div class="card h-100">
+                        <img src="https://picsum.photos/seed/libro6/200/300"
+                             class="card-img-top" alt="El nombre de la rosa">
+                        <div class="card-body d-flex flex-column">
+                            <h6 class="card-title">El nombre de la rosa</h6>
+                            <p class="card-text text-muted small">Umberto Eco</p>
+                            <a href="libro.html" class="mt-auto btn btn-outline-primary btn-sm">Ver más</a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
