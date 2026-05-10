@@ -48,7 +48,45 @@
 
         </div>
     </nav>
-    
+
+    <div class="container py-5">
+        <div class="row">
+
+            <!-- columna izquierda: imagen -->
+            <!-- col-md-5: en tablet y desktop ocupa 5 de 12 columnas. -->
+            <div class="col-md-5">
+                <!-- img-fluid: hace que la imagen no se desborde,
+                     se ajusta al ancho de su columna -->
+                <img src="https://picsum.photos/seed/librodetalle/400/600"
+                     class="img-fluid rounded" alt="El Aleph">
+            </div>
+
+            <!-- columna derecha: datos -->
+            <div class="col-md-7">
+                <h1>El Aleph</h1>
+                <p class="text-muted">Jorge Luis Borges</p>
+                <p>
+                    El Aleph es una de las obras más importantes de la literatura
+                    argentina. A través de una serie de cuentos, Borges explora
+                    temas como el tiempo, el infinito y la identidad, con una
+                    prosa precisa y conceptos filosóficos profundos.
+                </p>
+
+                <!-- fs-4: font-size nivel 4, más grande que el texto normal -->
+                <p class="fs-4 fw-bold">$1500</p>
+
+                <!-- d-flex gap-2: pone los botones en fila con espacio entre ellos -->
+                <div class="d-flex gap-2">
+                    <button class="btn btn-primary">Comprar</button>
+                    <a href="catalogo.html" class="btn btn-outline-secondary">
+                        Volver al catálogo
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </div> 
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
