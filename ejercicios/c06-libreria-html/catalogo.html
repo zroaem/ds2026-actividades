@@ -3,12 +3,48 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ca  talogo</title>
+    <title>Catalogo</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
 
+<!-- EN ORDEN: navbar, horizontal a hamburguesa, texto claro sobre fondo oscuro-->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+
+            <!-- Título y logo: lleva a index desde cualquier página -->
+            <a class="navbar-brand" href="index.html">
+                📚 Librería
+            </a>
+
+            <!-- Botón hamburguesa: solo aparece en pantallas chicas. data-bs-target tiene que coincidir con el id de abajo -->
+            <button class="navbar-toggler" type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#menuNavbar">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <!-- Menú colapsable, el id tiene que coincidir con data-bs-target -->
+            <div class="collapse navbar-collapse" id="menuNavbar">
+                <ul class="navbar-nav ms-auto">
+
+                    <!-- active marca la página actual. En cada HTML solo un link tiene active -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Inicio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="catalogo.html">Catálogo</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="contacto.html">Contacto</a>
+                    </li>
+
+                </ul>
+            </div>
+
+        </div>
+    </nav>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
