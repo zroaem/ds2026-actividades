@@ -1,14 +1,7 @@
 import { useState } from 'react';
 import BookCard from '../components/BookCard';
 import MoodFilter from '../components/MoodFilter';
-import type { Libro } from '../types/libro';
-
-const libros: Libro[] = [
-  { id: 1, titulo: "El Aleph", autor: "Borges", mood: "Mágico", imagen: "https://picsum.photos/300/400" },
-  { id: 2, titulo: "Rayuela", autor: "Cortázar", mood: "Drama", imagen: "https://picsum.photos/301/400" },
-  { id: 3, titulo: "1984", autor: "Orwell", mood: "Misterio", imagen: "https://picsum.photos/302/400" },
-  { id: 4, titulo: "La Metamorfosis", autor: "Kafka", mood: "Drama", imagen: "https://picsum.photos/303/400" },
-];
+import { libros } from '../data/libros';
 
 export default function Home() {
   const [filtro, setFiltro] = useState('Todos');

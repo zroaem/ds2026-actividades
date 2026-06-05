@@ -4,4 +4,5 @@ export interface Libro {
   autor: string;
   mood: string;
   imagen: string;
+  sinopsis: string;
 }
