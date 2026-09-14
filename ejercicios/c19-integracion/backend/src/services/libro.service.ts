@@ -2,7 +2,9 @@ import { prisma } from "../config/prisma";
 import { Libro } from "../types/libro.types";
 import { Prisma } from "../generated/prisma/client";
 
-export type LibroConAutor = Prisma.LibroGetPayload<{ include: { autor: true } }>;
+export type LibroConAutor = Prisma.LibroGetPayload<{
+  include: { autor: true; categorias: true };
+}>;
 
 export type LibroDetalle = Prisma.LibroGetPayload<{
   include: { autor: true; categorias: true };
@@ -10,7 +12,7 @@ export type LibroDetalle = Prisma.LibroGetPayload<{
 
 export async function findAll(): Promise<LibroConAutor[]> {
   return prisma.libro.findMany({
-    include: { autor: true },
+    include: { autor: true, categorias: true },
   });
 }
 

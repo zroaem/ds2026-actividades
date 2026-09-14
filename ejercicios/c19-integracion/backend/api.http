@@ -1,0 +1,227 @@
+@baseUrl = http://localhost:3000
+
+### Hello
+GET {{baseUrl}}/
+
+### === LIBROS ===
+
+### Listar libros
+GET {{baseUrl}}/api/libros
+
+### Ver un libro
+GET {{baseUrl}}/api/libros/1
+
+### Ver un libro que no existe -> 404
+GET {{baseUrl}}/api/libros/999
+
+### Crear un libro
+POST {{baseUrl}}/api/libros
+Content-Type: application/json
+
+{
+  "titulo": "Ficciones",
+  "autorId": 1,
+  "mood": "Mágico",
+  "imagen": "https://picsum.photos/305/400",
+  "sinopsis": "Un libro de cuentos."
+}
+
+### Modificar un libro
+PUT {{baseUrl}}/api/libros/1
+Content-Type: application/json
+
+{
+  "titulo": "El Aleph (Edición revisada)",
+  "autorId": 1,
+  "mood": "Mágico",
+  "imagen": "https://picsum.photos/300/400",
+  "sinopsis": "Nueva sinopsis."
+}
+
+### Modificar un libro que no existe -> 404
+PUT {{baseUrl}}/api/libros/999
+Content-Type: application/json
+
+{
+  "titulo": "X",
+  "autorId": 1,
+  "mood": "X",
+  "imagen": "X"
+}
+
+### Borrar un libro
+DELETE {{baseUrl}}/api/libros/2
+
+### Borrar un libro que no existe -> 404
+DELETE {{baseUrl}}/api/libros/999
+
+### 400 - sin título
+POST {{baseUrl}}/api/libros
+Content-Type: application/json
+
+{ "mood": "Triste", "imagen": "https://picsum.photos/400/400", "autorId": 1 }
+
+### 400 - id inválido
+GET {{baseUrl}}/api/libros/abc
+
+### 400 - autorId inexistente (formato válido, dato imposible)
+POST {{baseUrl}}/api/libros
+Content-Type: application/json
+
+{ "titulo": "Huérfano", "mood": "Confundido", "imagen": "https://picsum.photos/400/400", "autorId": 9999 }
+
+### 409 - autor duplicado
+POST {{baseUrl}}/api/autores
+Content-Type: application/json
+
+{ "nombre": "Jorge Luis Borges", "nacionalidad": "Argentina" }
+
+### 409 - borrar un autor con libros (onDelete: Restrict)
+DELETE {{baseUrl}}/api/autores/1
+
+### 404 - actualizar algo que no existe
+PUT {{baseUrl}}/api/libros/9999
+Content-Type: application/json
+
+{ "titulo": "No existo" }
+
+### Listar autores
+GET {{baseUrl}}/api/autores
+
+### Ver un autor
+GET {{baseUrl}}/api/autores/1
+
+### Ver un autor que no existe -> 404
+GET {{baseUrl}}/api/autores/999
+
+### Crear un autor
+POST {{baseUrl}}/api/autores
+Content-Type: application/json
+
+{
+  "nombre": "Gabriel García Márquez",
+  "nacionalidad": "Colombia"
+}
+
+### Modificar un autor
+PUT {{baseUrl}}/api/autores/1
+Content-Type: application/json
+
+{
+  "nombre": "Jorge Luis Borges",
+  "nacionalidad": "Argentina"
+}
+
+### Modificar un autor que no existe -> 404
+PUT {{baseUrl}}/api/autores/999
+Content-Type: application/json
+
+{
+  "nombre": "X"
+}
+
+### Borrar un autor
+DELETE {{baseUrl}}/api/autores/3
+
+### Borrar un autor que no existe -> 404
+DELETE {{baseUrl}}/api/autores/999
+
+### Registro OK
+POST http://localhost:3000/api/auth/registro
+Content-Type: application/json
+
+{
+  "email": "nuevo@libreria.test",
+  "password": "clave123",
+  "nombre": "Usuario Nuevo"
+}
+
+### Registro con email repetido → debería dar 409
+POST http://localhost:3000/api/auth/registro
+Content-Type: application/json
+
+{
+  "email": "admin@libreria.test",
+  "password": "clave123",
+  "nombre": "Otro"
+}
+
+### === AUTH ===
+
+### 1. Registro OK -> 201, sin passwordHash en la respuesta
+POST {{baseUrl}}/api/auth/registro
+Content-Type: application/json
+
+{
+  "email": "nuevo@libreria.test",
+  "password": "clave123",
+  "nombre": "Usuario Nuevo"
+}
+
+### 2. Registro con email repetido -> 409
+POST {{baseUrl}}/api/auth/registro
+Content-Type: application/json
+
+{
+  "email": "admin@libreria.test",
+  "password": "clave123",
+  "nombre": "Otro"
+}
+
+### 3. Login OK como ADMIN -> 200 con token
+# @name loginAdmin
+POST {{baseUrl}}/api/auth/login
+Content-Type: application/json
+
+{ "email": "admin@libreria.test", "password": "admin1234" }
+
+### 4. Login OK como CLIENTE -> 200 con token
+# @name loginCliente
+POST {{baseUrl}}/api/auth/login
+Content-Type: application/json
+
+{ "email": "cliente@libreria.test", "password": "cliente1234" }
+
+### 5. Login con password incorrecta -> 401, mensaje genérico
+POST {{baseUrl}}/api/auth/login
+Content-Type: application/json
+
+{ "email": "admin@libreria.test", "password": "cualquiercosa" }
+
+### 6. Login con email inexistente -> 401, MISMO mensaje que el caso 5
+POST {{baseUrl}}/api/auth/login
+Content-Type: application/json
+
+{ "email": "noexiste@libreria.test", "password": "cualquiercosa" }
+
+### 7. Quién soy, con token de ADMIN -> 200
+GET {{baseUrl}}/api/auth/yo
+Authorization: Bearer {{loginAdmin.response.body.token}}
+
+### 8. Quién soy, sin token -> 401
+GET {{baseUrl}}/api/auth/yo
+
+### === ESCRITURA PROTEGIDA (libros como ejemplo) ===
+
+### 9. Crear libro sin token -> 401
+POST {{baseUrl}}/api/libros
+Content-Type: application/json
+
+{ "titulo": "Test", "autorId": 1, "mood": "Test", "imagen": "x" }
+
+### 10. Crear libro con token de CLIENTE -> 403
+POST {{baseUrl}}/api/libros
+Content-Type: application/json
+Authorization: Bearer {{loginCliente.response.body.token}}
+
+{ "titulo": "Test", "autorId": 1, "mood": "Test", "imagen": "x" }
+
+### 11. Crear libro con token de ADMIN -> 201
+POST {{baseUrl}}/api/libros
+Content-Type: application/json
+Authorization: Bearer {{loginAdmin.response.body.token}}
+
+{ "titulo": "Test", "autorId": 1, "mood": "Test", "imagen": "x" }
+
+### 12. Lectura pública, sin token -> 200 (para confirmar que NO quedó todo bloqueado)
+GET {{baseUrl}}/api/libros

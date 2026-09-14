@@ -1,15 +1,28 @@
 import { useState } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
+import { useNavigate, Link, Navigate } from 'react-router-dom';
 import { apiFetch } from '../services/api';
 import { useFetch } from '../hooks/useFetch';
 import { libroSchema } from '../schemas/libroSchema';
 import type { Autor, Libro } from '../types/libro';
+
+function leerRolDelToken(token: string): string | null {
+  try {
+    const segundos = token.split('.')[1];
+    if (!segundos) return null;
+    const json = JSON.parse(atob(segundos.replace(/-/g, '+').replace(/_/g, '/')));
+    return json.rol ?? null;
+  } catch {
+    return null;
+  }
+}
 
 const MOODS = ['Mágico', 'Drama', 'Misterio', 'Aventura', 'Romance'];
 const IMG_PLACEHOLDER = 'https://picsum.photos/300/400';
 
 export default function LibroNuevo() {
   const navigate = useNavigate();
+  const token = localStorage.getItem('token');
+  const rol = token ? leerRolDelToken(token) : null;
   const { data: autores } = useFetch<Autor[]>('/autores');
 
   const [form, setForm] = useState({
@@ -23,6 +36,22 @@ export default function LibroNuevo() {
   const [errores, setErrores] = useState<Record<string, string>>({});
   const [error, setError] = useState<string | null>(null);
   const [enviando, setEnviando] = useState(false);
+
+  if (!token) {
+    return <Navigate to="/login" replace />;
+  }
+
+  if (rol !== 'ADMIN') {
+    return (
+      <div className="max-w-lg mx-auto p-6 text-center">
+        <h1 className="text-2xl font-bold mb-4">Acceso restringido</h1>
+        <p className="text-gray-600 mb-6">Solo los administradores pueden agregar libros.</p>
+        <Link to="/catalogo" className="text-blue-500 hover:underline">
+          ← Volver al catálogo
+        </Link>
+      </div>
+    );
+  }
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>
