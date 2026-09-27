@@ -8,3 +8,6 @@ tmp/nanoc/
 
 # Crash Log
 crash.log
+
+# Dependencies
+ejercicios/**/node_modules/
