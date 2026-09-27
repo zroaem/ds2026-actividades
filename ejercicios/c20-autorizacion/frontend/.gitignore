@@ -1,0 +1,26 @@
+# Dependencies
+node_modules
+
+# Builds
+dist
+dist-ssr
+
+# Env files (el .env real con valores locales va fuera de Git; .env.example va a Git)
+.env
+.env.local
+.env.*.local
+
+# Logs
+logs
+*.log
+
+# Editors
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
