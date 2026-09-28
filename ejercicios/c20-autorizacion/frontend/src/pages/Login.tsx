@@ -1,10 +1,11 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { apiFetch } from '../services/api';
+import { useAuth } from '../hooks/useAuth';
 import { loginSchema } from '../schemas/authSchema';
 
 export default function Login() {
   const navigate = useNavigate();
+  const { login } = useAuth();
 
   const [form, setForm] = useState({
     email: '',
@@ -40,11 +41,7 @@ export default function Login() {
 
     try {
       setEnviando(true);
-      const data = await apiFetch<{ token: string }>('/auth/login', {
-        method: 'POST',
-        body: JSON.stringify(form),
-      });
-      localStorage.setItem('token', data.token);
+      await login(resultado.data);
       navigate('/catalogo');
     } catch (e) {
       setError(e instanceof Error ? e.message : 'Error desconocido');
