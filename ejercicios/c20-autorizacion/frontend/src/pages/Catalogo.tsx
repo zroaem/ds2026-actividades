@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import MoodFilter from '../components/MoodFilter';
+import LibroCardDetallada from '../components/LibroCardDetallada';
 import { useFetch } from '../hooks/useFetch';
 import type { Categoria, Libro } from '../types/libro';
 
@@ -39,36 +40,35 @@ export default function Catalogo() {
           + Agregar libro
         </Link>
       </div>
-      <MoodFilter filtroActual={filtroMood} setFiltro={setFiltroMood} />
-      <div className="bg-gray-100 p-4 rounded-lg text-center mb-6">
-        <div className="flex justify-center gap-3">
-          {['Todos', ...(categorias ?? []).map((categoria) => categoria.nombre)].map((categoria) => (
-            <button
-              key={categoria}
-              onClick={() => setFiltroCategoria(categoria)}
-              className={`px-4 py-2 rounded-full border ${
-                filtroCategoria === categoria
-                  ? 'bg-blue-600 text-white border-blue-600'
-                  : 'bg-white text-gray-600 border-gray-300'
-              }`}
-            >
-              {categoria}
-            </button>
-          ))}
+
+      <div className="bg-white border border-gray-200 rounded-lg shadow-sm overflow-hidden mb-6">
+        <MoodFilter filtroActual={filtroMood} setFiltro={setFiltroMood} />
+        <div className="border-t border-gray-200 px-6 py-4">
+          <h2 className="text-sm font-semibold text-gray-500 mb-3">Categoría</h2>
+          <div className="flex flex-wrap gap-3">
+            {['Todos', ...(categorias ?? []).map((categoria) => categoria.nombre)].map((categoria) => (
+              <button
+                key={categoria}
+                onClick={() => setFiltroCategoria(categoria)}
+                className={`px-4 py-2 rounded-full border ${
+                  filtroCategoria === categoria
+                    ? 'bg-blue-600 text-white border-blue-600'
+                    : 'bg-gray-100 text-gray-600 border-gray-300'
+                }`}
+              >
+                {categoria}
+              </button>
+            ))}
+          </div>
         </div>
       </div>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-        {librosFiltrados.map((libro: Libro) => (
-          <div key={libro.id} className="border border-gray-200 p-4 rounded-lg bg-white">
-            <img src={libro.imagen} alt={libro.titulo} className="w-full h-48 object-cover rounded mb-3" />
-            <h3 className="font-bold text-lg">{libro.titulo}</h3>
-            <p className="text-gray-500 text-sm mb-3">{libro.autor.nombre}</p>
-            <Link to={`/libros/${libro.id}`} className="bg-blue-500 text-white px-3 py-1 rounded text-sm hover:bg-blue-600">
-              Ver más
-            </Link>
-          </div>
+
+      <div className="flex flex-col gap-4">
+        {librosFiltrados.map((libro) => (
+          <LibroCardDetallada key={libro.id} libro={libro} />
         ))}
       </div>
+
       {librosFiltrados.length === 0 && (
         <p className="text-center text-gray-500 mt-6">No hay libros que coincidan con los filtros.</p>
       )}

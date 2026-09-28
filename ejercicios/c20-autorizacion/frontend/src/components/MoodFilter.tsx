@@ -25,9 +25,9 @@ export default function MoodFilter({ filtroActual, setFiltro }: MoodFilterProps)
   const opciones = ['Todos', ...moods];
 
   return (
-    <div className="bg-gray-100 p-6 rounded-lg text-center mb-8">
-      <h2 className="text-xl font-bold mb-4">¿De qué humor estás hoy?</h2>
-      <div className="flex justify-center gap-3">
+    <div className="px-6 py-4">
+      <h2 className="text-sm font-semibold text-gray-500 mb-3">Humor</h2>
+      <div className="flex flex-wrap gap-3">
         {opciones.map((mood) => (
           <button
             key={mood}
