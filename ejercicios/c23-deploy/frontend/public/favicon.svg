@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64" role="img" aria-label="La Librería">
+  <rect x="2" y="2" width="60" height="60" rx="14" fill="#FAF3E0" />
+  <text
+    x="32"
+    y="45"
+    text-anchor="middle"
+    font-family="Georgia, 'Times New Roman', serif"
+    font-weight="700"
+    font-size="40"
+    fill="#000000"
+  >L</text>
+</svg>

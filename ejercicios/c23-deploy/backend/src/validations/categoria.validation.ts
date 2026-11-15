@@ -1,0 +1,9 @@
+import { z } from "zod";
+
+export const categoriaCreateSchema = z.object({
+  nombre: z.string().trim().min(1, "El nombre es obligatorio").max(200),
+});
+
+export const categoriaUpdateSchema = categoriaCreateSchema.partial();
+
+export type CategoriaCreate = z.infer<typeof categoriaCreateSchema>;
